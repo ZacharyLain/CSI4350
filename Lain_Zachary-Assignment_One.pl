@@ -1,5 +1,7 @@
-% Question 1
-% Complete the following exercise in terms of the given relations parent(X,Y), female(X) and male(X) .
+% To compile
+% ['Lain_Zachary-Assignment_One.pl'].
+
+% Complete the following exercise in terms of the given relations parent(X,Y), female(X) and male(X).
 
 % Define a mother predicate so that mother(X,Y) says that X is the mother of Y.
 mother(X,Y) :- parent(X,Y), female(X).
@@ -42,5 +44,34 @@ female(anne).
 female(mary).
 female(kathy).
 
-% Question 2
-%
+% Setup for the Peanos number questions
+nat(0).
+nat(s(N)) :- nat(N).
+
+plus(0,X,X) :- nat(X).
+plus(s(X),Y,s(Z)) :- plus(X,Y,Z).
+
+mult(0,X,0) :- nat(X).
+mult(s(X),Y,Z) :- mult(X,Y,W),plus(Y,W,Z).
+
+% Base case, 0 is even
+even(0).
+
+% A number is even if 2 successors after it is even
+% 2+2=4 which is even, 4+2=6, etc.
+% 1+2=3 which is odd, 3+2=5, etc.
+even(s(s(N))) :- even(N).
+
+% Define a binary predicate named divisor such that divisor(X,Y) is true if and only if 
+% X is a multiple of Y where X and Y are Peano’s numbers.
+
+% Subtraction rule defined with Peano numbers
+subtract(0, Y, Y) :- nat(Y).
+subtract(s(X), s(Y), Z) :- subtract(X, Y, Z).
+
+% Divisor definition
+% Base case, any number divides zero
+divisor(X, 0) :- nat(X).
+
+% Recursive case.
+divisor(X, Y) :- subtract(X, Y, Z), divisor(X, Z).
